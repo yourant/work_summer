@@ -1,0 +1,562 @@
+{
+    "fields": [
+        {
+            "key": "org_type",
+            "label": "类别",
+            "component": "hc-select",
+            "sequence": 10,
+            "options": {
+                "data_type": "integer",
+                "required": true,
+                "width": "col-6",
+                "singleLine": true,
+                "data_precision": null,
+                "hide": false,
+                "readOnly": true,
+                "placeholder": "请输入类别",
+                "default": null,
+                "default_expression": null,
+                "list": [
+                    {
+                        "value": 10,
+                        "label": "单位"
+                    },
+                    {
+                        "value": 20,
+                        "label": "部门"
+                    },
+                    {
+                        "value": 40,
+                        "label": "岗位"
+                    }
+                ],
+                "no_null": true
+            },
+            "state": null
+        },
+        {
+            "key": "begin_date",
+            "label": "生效时间",
+            "component": "hc-input-datetime",
+            "sequence": 10,
+            "options": {
+                "data_type": "date",
+                "required": true,
+                "width": "col-6",
+                "singleLine": true,
+                "data_precision": null,
+                "hide": false,
+                "readOnly": false,
+                "placeholder": "请输入生效时间",
+                "default": null,
+                "default_expression": null
+            },
+            "state": null
+        },
+        {
+            "key": "number",
+            "label": "编号",
+            "component": "hc-input",
+            "sequence": 20,
+            "options": {
+                "data_type": "string",
+                "required": false,
+                "width": "col-6",
+                "singleLine": true,
+                "data_precision": null,
+                "hide": false,
+                "readOnly": false,
+                "placeholder": "请输入编号",
+                "default": null,
+                "default_expression": null,
+                "maxlength": 30
+            },
+            "state": null
+        },
+        {
+            "key": "name",
+            "label": "组织名称",
+            "component": "hc-input",
+            "sequence": 30,
+            "options": {
+                "data_type": "string",
+                "required": true,
+                "width": "col-6",
+                "singleLine": true,
+                "data_precision": null,
+                "hide": false,
+                "readOnly": false,
+                "placeholder": "请输入组织名称",
+                "default": null,
+                "default_expression": null,
+                "maxlength": 50
+            },
+            "state": null,
+            "dev_is_copy": true
+        },
+        {
+            "key": "establishment_date",
+            "label": "设立时间",
+            "component": "hc-input-datetime",
+            "sequence": 40,
+            "options": {
+                "data_type": "date",
+                "required": false,
+                "width": "col-6",
+                "singleLine": true,
+                "data_precision": null,
+                "hide": false,
+                "readOnly": false,
+                "placeholder": "请输入设立时间",
+                "default": null,
+                "default_expression": null
+            },
+            "state": null
+        },
+        {
+            "key": "parent_id",
+            "label": "上级组织",
+            "sequence": 40,
+            "component": "hc-standard-tree-selector",
+            "options": {
+                "effect_date": "=function(){return SCOPE.base_form.data.begin_date}",
+                "singleLine": true,
+                "width": "col-6",
+                "no_delete": true,
+                "readOnly": true,
+                "selectorModel": "OrgDepartment",
+                "filter_dict": {
+                    "org_type": [
+                        "10",
+                        "20"
+                    ]
+                },
+                "required": true,
+                "extra_property": {
+                    "role": "cm-org-emp.org",
+                    "is_display_unit": true
+                }
+            }
+        },
+        {
+            "key": "fax",
+            "label": "传真",
+            "component": "hc-input",
+            "sequence": 50,
+            "options": {
+                "data_type": "string",
+                "required": false,
+                "width": "col-6",
+                "singleLine": true,
+                "data_precision": null,
+                "hide": true,
+                "readOnly": false,
+                "placeholder": "请输入传真",
+                "default": null,
+                "default_expression": null,
+                "maxlength": 20
+            },
+            "state": null
+        },
+        {
+            "key": "charge_position_id",
+            "label": "负责人岗位",
+            "component": "hc-tree-list-selector",
+            "sequence": 60,
+            "options": {
+                "data_type": "integer",
+                "required": false,
+                "width": "col-6",
+                "singleLine": true,
+                "data_precision": null,
+                "hide": false,
+                "readOnly": false,
+                "placeholder": "请输入负责人岗位",
+                "default": null,
+                "default_expression": null,
+                "role": "manager",
+                "selectorModel": "OrgPosition",
+                "selectorFilter": {
+                    "enabled": true
+                },
+                "extra_property": {
+                    "role": "all",
+                    "is_display_unit": true
+                },
+                "effect_date": "=function(){return SCOPE.base_form.data.begin_date}",
+                "selectorOptions": [
+                    {
+                        "auto_select": false
+                    },
+                    {
+                        "mini_type": 40,
+                        "hide_position": false,
+                        "role": "all"
+                    },
+                    [
+                        "40"
+                    ]
+                ]
+            },
+            "state": null
+        },
+        {
+            "key": "charge_person_id",
+            "label": "组织负责人",
+            "component": "hc-tree-list-selector",
+            "sequence": 70,
+            "options": {
+                "data_type": "integer",
+                "required": false,
+                "width": "col-6",
+                "singleLine": true,
+                "data_precision": null,
+                "hide": false,
+                "readOnly": false,
+                "placeholder": "请输入组织负责人",
+                "default": null,
+                "default_expression": null,
+                "selectorModel": "Employee",
+                "role": "all",
+                "filter_dict": {
+                    "job_info.position_type": 1
+                },
+                "assignment": "$scope.selectorParseEmployee"
+            },
+            "state": null
+        },
+        {
+            "sequence": 80,
+            "component": "hc-select",
+            "label": "部门类别",
+            "state": null,
+            "key": "BMLB",
+            "options": {
+                "singleLine": true,
+                "hide": false,
+                "data_type": "string",
+                "default": null,
+                "required": false,
+                "list": [
+                    {
+                        "value": "zn",
+                        "label": "职能部门"
+                    },
+                    {
+                        "value": "sc",
+                        "label": "生产部门"
+                    }
+                ],
+                "default_expression": null,
+                "width": "col-6",
+                "readOnly": false,
+                "data_precision": 0,
+                "no_null": true,
+                "placeholder": "请输入部门类别"
+            }
+        },
+        {
+            "key": "contract_body_id",
+            "label": "合同主体",
+            "component": "hc-super-selector",
+            "sequence": 90,
+            "options": {
+                "data_type": "integer",
+                "required": false,
+                "width": "col-6",
+                "singleLine": true,
+                "data_precision": null,
+                "hide": false,
+                "readOnly": false,
+                "placeholder": "请输入合同主体",
+                "default": null,
+                "default_expression": null,
+                "selectorModel": "ContractFirstParty"
+            },
+            "state": null,
+            "field": [
+                "contract_body",
+                "name"
+            ]
+        },
+        {
+            "key": "orderno",
+            "label": "排序码",
+            "component": "hc-input",
+            "sequence": 100,
+            "options": {
+                "data_type": "string",
+                "required": false,
+                "width": "col-6",
+                "singleLine": true,
+                "data_precision": null,
+                "hide": false,
+                "readOnly": false,
+                "placeholder": "请输入排序码",
+                "default": null,
+                "default_expression": null,
+                "maxlength": 200
+            },
+            "state": null
+        },
+        {
+            "sequence": 110,
+            "component": "hc-select",
+            "label": "test01",
+            "state": null,
+            "key": "test01",
+            "options": {
+                "singleLine": true,
+                "hide": true,
+                "data_type": "multi",
+                "default": null,
+                "required": false,
+                "list": [
+                    {
+                        "value": "a",
+                        "label": "测试1"
+                    },
+                    {
+                        "value": "b",
+                        "label": "测试2"
+                    }
+                ],
+                "default_expression": null,
+                "width": "col-6",
+                "readOnly": false,
+                "data_precision": null,
+                "no_null": true,
+                "placeholder": "请输入test01"
+            }
+        },
+        {
+            "key": "virtual",
+            "label": "是否虚拟组织",
+            "component": "hc-select",
+            "sequence": 120,
+            "options": {
+                "data_type": "multi",
+                "required": false,
+                "width": "col-6",
+                "singleLine": true,
+                "data_precision": null,
+                "hide": false,
+                "readOnly": false,
+                "placeholder": "请输入是否虚拟组织",
+                "default": null,
+                "default_expression": null,
+                "list": [
+                    {
+                        "value": "a",
+                        "label": "是"
+                    },
+                    {
+                        "value": "b",
+                        "label": "否"
+                    }
+                ],
+                "no_null": true
+            },
+            "state": null
+        },
+        {
+            "sequence": 130,
+            "component": "hc-select",
+            "label": "是否省内",
+            "state": null,
+            "key": "test1",
+            "options": {
+                "singleLine": true,
+                "hide": false,
+                "data_type": "multi",
+                "default": null,
+                "required": true,
+                "list": [
+                    {
+                        "value": "y",
+                        "label": "是"
+                    },
+                    {
+                        "value": "n",
+                        "label": "否"
+                    }
+                ],
+                "default_expression": null,
+                "width": "col-6",
+                "readOnly": false,
+                "data_precision": null,
+                "no_null": true,
+                "placeholder": "请输入是否省内"
+            }
+        },
+        {
+            "sequence": 140,
+            "component": "hc-input",
+            "label": "test",
+            "state": null,
+            "key": "t1",
+            "options": {
+                "singleLine": true,
+                "hide": true,
+                "data_type": "string",
+                "default": null,
+                "required": false,
+                "default_expression": null,
+                "width": "col-6",
+                "readOnly": false,
+                "data_precision": 0,
+                "placeholder": "请输入test"
+            }
+        },
+        {
+            "sequence": 150,
+            "component": "hc-input",
+            "label": "test",
+            "state": null,
+            "key": "t2",
+            "options": {
+                "singleLine": true,
+                "hide": true,
+                "data_type": "string",
+                "default": null,
+                "required": false,
+                "default_expression": null,
+                "width": "col-6",
+                "readOnly": false,
+                "data_precision": 0,
+                "placeholder": "请输入test"
+            }
+        },
+        {
+            "sequence": 160,
+            "component": "hc-input",
+            "label": "test",
+            "state": null,
+            "key": "t3",
+            "options": {
+                "singleLine": true,
+                "hide": true,
+                "data_type": "string",
+                "default": null,
+                "required": false,
+                "default_expression": null,
+                "width": "col-6",
+                "readOnly": false,
+                "data_precision": 0,
+                "placeholder": "请输入test"
+            }
+        },
+        {
+            "sequence": 170,
+            "component": "hc-input",
+            "label": "test",
+            "state": null,
+            "key": "t4",
+            "options": {
+                "singleLine": true,
+                "hide": true,
+                "data_type": "number",
+                "default": null,
+                "required": false,
+                "default_expression": null,
+                "width": "col-6",
+                "readOnly": false,
+                "data_precision": 0,
+                "placeholder": "请输入test"
+            }
+        },
+        {
+            "sequence": 180,
+            "component": "hc-input",
+            "label": "test",
+            "state": null,
+            "key": "t5",
+            "options": {
+                "singleLine": true,
+                "hide": true,
+                "data_type": "number",
+                "default": null,
+                "required": false,
+                "default_expression": null,
+                "width": "col-6",
+                "readOnly": false,
+                "data_precision": 0,
+                "placeholder": "请输入test"
+            }
+        },
+        {
+            "sequence": 190,
+            "component": "hc-input",
+            "label": "test",
+            "state": null,
+            "key": "t7",
+            "options": {
+                "singleLine": true,
+                "hide": true,
+                "data_type": "number",
+                "default": null,
+                "required": false,
+                "default_expression": null,
+                "width": "col-6",
+                "readOnly": false,
+                "data_precision": 0,
+                "placeholder": "请输入test"
+            }
+        }
+    ],
+    "actions": [
+        {
+            "key": "setup",
+            "label": "元数据配置",
+            "action": "SETUP",
+            "left": true,
+            "target": [
+                "pc"
+            ],
+            "data": "OrgDepartment.meta.info.json"
+        },
+        {
+            "action": "SETUP",
+            "left": true,
+            "data": "OrgDepartment.meta.info.json",
+            "key": "setup",
+            "label": "元数据配置"
+        }
+    ],
+    "groups": [
+        {
+            "key": "business_desc",
+            "label": "业务描述",
+            "field_list": [
+                "begin_date"
+            ]
+        },
+        {
+            "key": "job_info_detail",
+            "label": "部门详细信息",
+            "field_list": []
+        }
+    ],
+    "functional_state": [],
+    "check_items": {},
+    "tip": null,
+    "childrens": [
+        {
+            "parent_id": "parent_id",
+            "model": "OrgDepartment",
+            "key": "org_list",
+            "is_form": true,
+            "state": "copyList",
+            "filter_dict": {
+                "date_": "=SCOPE.base_form.data.begin_date"
+            },
+            "name": "直属部门"
+        }
+    ],
+    "description": "组织管理",
+    "form_relations": [],
+    "extend": [],
+    "meta_key": "OrgDepartment.meta.info.json",
+    "model": "OrgDepartment",
+    "state": null
+}

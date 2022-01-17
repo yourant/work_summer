@@ -1,0 +1,34 @@
+{
+    "outer_info": {
+        "work_weixin": {
+            "id": 72122,
+            "history": [
+                {
+                    "success": false,
+                    "sync_time": "2021-06-03 15: 37: 27",
+                    "sync_type": "org_new"
+                },
+                {
+                    "success": false,
+                    "sync_time": "2021-06-03 16: 19: 21",
+                    "sync_type": "org_new"
+                },
+                {
+                    "id": 72122,
+                    "success": true,
+                    "sync_time": "2021-06-03 17: 20: 17",
+                    "sync_type": "org_new"
+                },
+                {
+                    "id": 72122,
+                    "success": true,
+                    "sync_time": "2021-06-04 17: 25: 40",
+                    "sync_type": "org_sync"
+                }
+            ],
+            "success": true,
+            "sync_time": "2021-06-04 17: 25: 40",
+            "sync_type": "org_sync"
+        }
+    }
+}

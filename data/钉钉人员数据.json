@@ -1,0 +1,40 @@
+{
+    "_id": 2249967,
+    "department": 105140380,
+    "email": None,
+    "jobnumber": "000031",
+    "mobile": "13200000000",
+    "name": "卢小鱼0001",
+    "orderInDepts": "{"105140380":1}",
+    "position": "功能测试岗",
+    "userid": "2249967"
+}
+# 要求 orderInDepts 是json
+
+{
+    "_id": 2249967,
+    "department": [],
+    "email": None,
+    "jobnumber": "000031",
+    "mobile": "13200000000",
+    "name": "卢小鱼0001",
+    "orderInDepts": "{"105140380":1}",
+    "position": "功能测试岗",
+    "userid": "2249967"
+}
+
+
+请求发送的数据
+
+{
+    "department": [105140380],
+    "email": None,
+    "jobnumber": "000031",
+    "mobile": "13200000000",
+    "name": "卢小鱼0001",
+    "orderInDepts": {
+        "105140380": 1
+    },
+    "position": "功能测试岗",
+    "userid": "2249967"
+}

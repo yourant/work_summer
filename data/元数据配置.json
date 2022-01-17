@@ -1,0 +1,136 @@
+{   
+    "model": "Employee",
+    "filter_dict": {},
+    "extra_property": {
+        "sorts": [
+            {
+                "key": "orderno",
+                "type": "asc"
+            }
+        ],
+        "fields": [
+            {
+                "key": "id",
+                "map": "_id",
+                "type": "int",
+                "field": [
+                    "id"
+                ],
+                "required": false
+            },
+            {
+                "key": "name",
+                "map": "real_name",
+                "type": "string",
+                "field": [
+                    "name"
+                ],
+                "default": "",
+                "required": false
+            },
+            {
+                "key": "department",
+                "map": "org_id",
+                "type": "string",
+                "field": [
+                    "department",
+                    "number"
+                ],
+                "required": true
+            },
+            {
+                "key": "number",
+                "map": "code",
+                "type": "string",
+                "field": [
+                    "number"
+                ],
+                "required": true
+            },
+            {
+                "key": "mobile",
+                "map": "mobile",
+                "type": "string",
+                "field": [
+                    "mobile"
+                ],
+                "required": true
+            }
+        ],
+        "query_str": "operate_time >= '20210427040635' OR department.operate_time >= '20210427040635' OR position.operate_time >= '20210427040635' OR job_info.operate_time >= '20210427040635'",
+        "relations": [
+            {
+                "key": "job_info",
+                "name": "任职信息",
+                "model": "JobInformation",
+                "filter": {
+                    "job_info.end_date": {
+                        "gt": "=date_"
+                    },
+                    "job_info.begin_date": {
+                        "lte": "=date_"
+                    },
+                    "job_info.employee_id": ":id",
+                    "job_info.position_type": "1"
+                }
+            },
+            {
+                "key": "position",
+                "blur": [
+                    "name"
+                ],
+                "name": "岗位信息",
+                "type": "outer",
+                "model": "OrgPositionHistory",
+                "filter": {
+                    "position.end_date": {
+                        "gt": "=date_"
+                    },
+                    "position.begin_date": {
+                        "lte": "=date_"
+                    },
+                    "job_info.position_id": ":position.origin_id"
+                }
+            },
+            {
+                "key": "department",
+                "name": "部门信息",
+                "type": "outer",
+                "model": "OrgDepartmentHistory",
+                "filter": {
+                    "position.parent_id": ":department.origin_id",
+                    "department.end_date": {
+                        "gt": "=date_"
+                    },
+                    "department.begin_date": {
+                        "lte": "=date_"
+                    }
+                }
+            },
+            {
+                "key": "unit",
+                "name": "单位信息",
+                "type": "outer",
+                "model": "OrgUnitHistory",
+                "filter": {
+                    "unit.end_date": {
+                        "gt": "=date_"
+                    },
+                    "unit.begin_date": {
+                        "lte": "=date_"
+                    },
+                    "department.subordinate_unit_id": ":unit.origin_id"
+                }
+            },
+            {
+                "key": "job",
+                "name": "标准岗位",
+                "type": "outer",
+                "model": "Job",
+                "filter": {
+                    "job.id": ":job_info.job_id"
+                }
+            }
+        ]
+    }
+}
