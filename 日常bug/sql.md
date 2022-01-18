@@ -25,3 +25,5 @@ select gender, count(gender) from user group by gender
 可以输出sql 执行耗时
 explain select id from user where id = 1
 ```
+
+> 柔性事务和钢性事务, 雪花算法, 
