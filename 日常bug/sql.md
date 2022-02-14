@@ -26,4 +26,4 @@ select gender, count(gender) from user group by gender
 explain select id from user where id = 1
 ```
 
-> 柔性事务和钢性事务, 雪花算法, 
+> 柔性事务和钢性事务, 雪花算法生成id, 
